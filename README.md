@@ -13,7 +13,7 @@ This action currently supports GitHub-provided Linux, macOS and Windows runners 
 Add the following entry to your Github workflow YAML file:
 
 ```yaml
-uses: step-security/cosign-installer@v4.0.0
+uses: step-security/cosign-installer@v4
 with:
   cosign-release: 'v3.0.2' # optional
 ```
@@ -30,7 +30,7 @@ jobs:
     name: Install Cosign
     steps:
       - name: Install Cosign
-        uses: step-security/cosign-installer@v4.0.0
+        uses: step-security/cosign-installer@v4
         with:
           cosign-release: 'v3.0.2'
       - name: Check install!
@@ -49,7 +49,7 @@ jobs:
     name: Install Cosign
     steps:
       - name: Install Cosign
-        uses: step-security/cosign-installer@v4.0.0
+        uses: step-security/cosign-installer@v4
       - name: Check install!
         run: cosign version
 ```
@@ -68,12 +68,12 @@ jobs:
     name: Install Cosign via go install
     steps:
       - name: Install go
-        uses: actions/setup-go@v6.0.0
+        uses: actions/setup-go@v6
         with:
           go-version: '1.24'
           check-latest: true
       - name: Install Cosign
-        uses: step-security/cosign-installer@v4.0.0
+        uses: step-security/cosign-installer@v4
         with:
           cosign-release: main
       - name: Check install!
@@ -105,29 +105,29 @@ jobs:
           fetch-depth: 1
 
       - name: Install Cosign
-        uses: step-security/cosign-installer@v4.0.0
+        uses: step-security/cosign-installer@v4
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3.6.0
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.11.1
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3.4.0
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: docker_meta
-        uses: docker/metadata-action@v5.7.0
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/sigstore/sample-honk
           tags: type=sha,format=long
 
       - name: Build and Push container images
-        uses: docker/build-push-action@v6.18.0
+        uses: docker/build-push-action@v6
         id: build-and-push
         with:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
@@ -168,8 +168,3 @@ The following optional inputs:
 | `cosign-release` | `cosign` version to use instead of the default. |
 | `install-dir` | directory to place the `cosign` binary into instead of the default (`$HOME/.cosign`). |
 | `use-sudo` | set to `true` if `install-dir` location requires sudo privs. Defaults to false. |
-
-## Security
-
-Should you discover any security issues, please refer to Sigstore's [security
-process](https://github.com/sigstore/.github/blob/main/SECURITY.md)
