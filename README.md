@@ -68,12 +68,12 @@ jobs:
     name: Install Cosign via go install
     steps:
       - name: Install go
-        uses: actions/setup-go@v6.0.0
+        uses: actions/setup-go@v6
         with:
           go-version: '1.24'
           check-latest: true
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v4.1.0
+        uses: step-security/cosign-installer@v4
         with:
           cosign-release: main
       - name: Check install!
