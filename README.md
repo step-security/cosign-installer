@@ -14,11 +14,28 @@ Add the following entry to your Github workflow YAML file:
 
 ```yaml
 uses: step-security/cosign-installer@v4
-with:
-  cosign-release: 'v3.0.3' # optional
 ```
 
-Example using a pinned version:
+Full example:
+
+```yaml
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    permissions: {}
+
+    name: Install Cosign
+    steps:
+      - name: Install Cosign
+        uses: step-security/cosign-installer@v4
+      - name: Check install!
+        run: cosign version
+```
+
+The used Cosign version only changes when cosign-installer is upgraded. If you need to select a specific Cosign version, use `cosign-release` but note that you are now responsible for maintaining the Cosign version (in addition to maintaining the cosign-installer version).
+
+Example pinning Cosign version with `cosign-release`:
 
 ```yaml
 jobs:
@@ -32,24 +49,7 @@ jobs:
       - name: Install Cosign
         uses: step-security/cosign-installer@v4
         with:
-          cosign-release: 'v3.0.3'
-      - name: Check install!
-        run: cosign version
-```
-
-Example using the default version:
-
-```yaml
-jobs:
-  example:
-    runs-on: ubuntu-latest
-
-    permissions: {}
-
-    name: Install Cosign
-    steps:
-      - name: Install Cosign
-        uses: step-security/cosign-installer@v4
+          cosign-release: 'v3.0.5'
       - name: Check install!
         run: cosign version
 ```
@@ -68,12 +68,12 @@ jobs:
     name: Install Cosign via go install
     steps:
       - name: Install go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v6.0.0
         with:
           go-version: '1.24'
           check-latest: true
       - name: Install Cosign
-        uses: step-security/cosign-installer@v4
+        uses: sigstore/cosign-installer@v4.1.0
         with:
           cosign-release: main
       - name: Check install!
