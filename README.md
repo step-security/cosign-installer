@@ -14,11 +14,28 @@ Add the following entry to your Github workflow YAML file:
 
 ```yaml
 uses: step-security/cosign-installer@v4
-with:
-  cosign-release: 'v3.0.2' # optional
 ```
 
-Example using a pinned version:
+Full example:
+
+```yaml
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    permissions: {}
+
+    name: Install Cosign
+    steps:
+      - name: Install Cosign
+        uses: step-security/cosign-installer@v4
+      - name: Check install!
+        run: cosign version
+```
+
+The used Cosign version only changes when cosign-installer is upgraded. If you need to select a specific Cosign version, use `cosign-release` but note that you are now responsible for maintaining the Cosign version (in addition to maintaining the cosign-installer version).
+
+Example pinning Cosign version with `cosign-release`:
 
 ```yaml
 jobs:
@@ -32,24 +49,7 @@ jobs:
       - name: Install Cosign
         uses: step-security/cosign-installer@v4
         with:
-          cosign-release: 'v3.0.2'
-      - name: Check install!
-        run: cosign version
-```
-
-Example using the default version:
-
-```yaml
-jobs:
-  example:
-    runs-on: ubuntu-latest
-
-    permissions: {}
-
-    name: Install Cosign
-    steps:
-      - name: Install Cosign
-        uses: step-security/cosign-installer@v4
+          cosign-release: 'v3.0.5'
       - name: Check install!
         run: cosign version
 ```
@@ -83,7 +83,7 @@ jobs:
 This action does not need any GitHub permission to run, however, if your workflow needs to update, create or perform any
 action against your repository, then you should change the scope of the permission appropriately.
 
-For example, if you are using the `gcr.io` as your registry to push the images you will need to give the `write` permission
+For example, if you are using the `ghcr.io` as your registry to push the images you will need to give the `write` permission
 to the `packages` scope.
 
 Example of a simple workflow:
