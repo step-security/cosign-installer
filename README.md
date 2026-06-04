@@ -51,7 +51,7 @@ jobs:
       - name: Install Cosign
         uses: step-security/cosign-installer@v4
         with:
-          cosign-release: 'v3.0.5'
+          cosign-release: 'v3.0.6'
       - name: Check install!
         run: cosign version
 ```
