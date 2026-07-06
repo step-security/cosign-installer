@@ -1,0 +1,18 @@
+{
+   "schema_version": "1",
+   "onboarding_type": "copied",
+   "archived": false,
+   "maintained_action_name": "step-security/cosign-installer",
+   "upstream_full_repo_name": "sigstore/cosign-installer",
+   "action_type": "composite",
+   "last_release": {
+     "tag_name": "v4.1.2",
+     "created_at": "2026-06-04T04:29:16Z",
+     "published_at": "2026-06-05T05:40:53Z"
+   },
+   "sync": {
+     "ignore_presets": [
+       "defaults_v1"
+     ]
+   }
+ }
